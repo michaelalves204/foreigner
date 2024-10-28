@@ -3,7 +3,8 @@ module Foreigner
     extend ActiveSupport::Concern
 
     included do
-      alias_method_chain :tables, :foreign_keys
+      alias_method :tables_without_foreign_keys, :tables
+      alias_method :tables, :tables_with_foreign_keys
     end
 
     module ClassMethods

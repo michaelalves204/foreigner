@@ -1,10 +1,11 @@
 module Foreigner
-  module ConnectionAdapters    
+  module ConnectionAdapters
     module Table
       extend ActiveSupport::Concern
 
       included do
-        alias_method_chain :references, :foreign_keys
+        alias_method :references_without_foreign_keys, :references
+        alias_method :references, :references_with_foreign_keys
       end
 
       # Adds a new foreign key to the table. +to_table+ can be a single Symbol, or
